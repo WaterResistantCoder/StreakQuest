@@ -34,7 +34,7 @@ To get a local copy up and running, follow these simple steps.
 
 ### Prerequisites
 
-*   Android Studio Iguana | 2023.2.1 or later
+*   Android Studio Narwhal or later
 *   Android SDK 34
 
 ### Installation
