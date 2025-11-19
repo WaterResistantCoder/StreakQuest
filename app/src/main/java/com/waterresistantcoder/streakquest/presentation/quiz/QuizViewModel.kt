@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.waterresistantcoder.streakquest.domain.usecase.GetQuestionsUseCase
+import com.waterresistantcoder.streakquest.util.Constants
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -94,7 +95,7 @@ class QuizViewModel @Inject constructor(
 
         // Wait 2 seconds then advance
         viewModelScope.launch {
-            delay(2000L)
+            delay(Constants.QUESTION_TRANSITION_DELAY)
             advanceToNextQuestion()
         }
     }

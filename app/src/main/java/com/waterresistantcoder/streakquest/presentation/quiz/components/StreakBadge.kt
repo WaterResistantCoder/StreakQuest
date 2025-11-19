@@ -21,6 +21,7 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.waterresistantcoder.streakquest.R
+import com.waterresistantcoder.streakquest.util.Constants
 import kotlinx.coroutines.launch
 
 @Composable
@@ -28,7 +29,7 @@ fun StreakBadge(
     streakCount: Int,
     modifier: Modifier = Modifier
 ) {
-    val streakThreshold = 3 // Hardcoded as requested
+    val streakThreshold = Constants.STREAK_THRESHOLD
     val progress by animateFloatAsState(
         targetValue = (streakCount.toFloat() / streakThreshold).coerceIn(0f, 1f),
         label = "StreakProgress"

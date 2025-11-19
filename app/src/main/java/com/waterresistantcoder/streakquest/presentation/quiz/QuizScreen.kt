@@ -119,8 +119,6 @@ fun QuizScreen(
                 Text(text = state.error, color = Color.Red)
             }
         } else if (state.questions.isNotEmpty()) {
-            var swipeDirection by remember { mutableStateOf(1) }
-
             // Animated Content for "Swipe" effect between questions
             AnimatedContent(
                 targetState = state.currentQuestionIndex,
