@@ -3,7 +3,9 @@ package com.waterresistantcoder.streakquest.data.repository
 import android.util.Log
 import com.waterresistantcoder.streakquest.data.mapper.toDomainQuestion
 import com.waterresistantcoder.streakquest.data.remote.QuizApi
+import com.waterresistantcoder.streakquest.data.remote.dto.QuizModuleDto
 import com.waterresistantcoder.streakquest.domain.model.Question
+import com.waterresistantcoder.streakquest.domain.model.QuizModule
 import com.waterresistantcoder.streakquest.domain.repository.QuizRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -12,6 +14,16 @@ import javax.inject.Inject
 class QuizRepositoryImpl @Inject constructor(
     private val api: QuizApi
 ) : QuizRepository {
+    override suspend fun getQuizModules(): List<QuizModule> {
+        return withContext(Dispatchers.IO) {
+            try {
+                api.getQuizModules()
+            } catch (e: Exception) {
+                Log.e("QuizRepository", "Error fetching questions", e)
+                emptyList()
+            }
+        }
+    }
 
     override suspend fun getQuestions(quizUrl: String): List<Question> {
         return withContext(Dispatchers.IO) {

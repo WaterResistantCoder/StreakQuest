@@ -5,7 +5,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.waterresistantcoder.streakquest.data.local.entity.QuizModuleEntity
 import com.waterresistantcoder.streakquest.domain.usecase.GetQuestionsUseCase
+import com.waterresistantcoder.streakquest.domain.usecase.GetQuizModelUseCase
 import com.waterresistantcoder.streakquest.util.Constants
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
@@ -15,12 +17,14 @@ import javax.inject.Inject
 @HiltViewModel
 class QuizViewModel @Inject constructor(
     private val getQuestionsUseCase: GetQuestionsUseCase,
+    private val getQuizModelUseCase: GetQuizModelUseCase,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
     private val _state = mutableStateOf(QuizState())
     val state: State<QuizState> = _state
 
+    private val id: String = checkNotNull(savedStateHandle.get<String>("id"))
     private val quizUrl: String = checkNotNull(savedStateHandle.get<String>(Constants.QUIZ_URL_KEY))
 
     init {
@@ -96,6 +100,15 @@ class QuizViewModel @Inject constructor(
             maxStreak = newMaxStreak,
             answers = newAnswers
         )
+
+        viewModelScope.launch {
+            getQuizModelUseCase.insertModule(QuizModuleEntity(
+                id = id,
+                highestAnsweredIndex = currentState.currentQuestionIndex,
+                answers = newAnswers,
+                score = newScore
+            ))
+        }
 
         // Wait 2 seconds then advance
         viewModelScope.launch {

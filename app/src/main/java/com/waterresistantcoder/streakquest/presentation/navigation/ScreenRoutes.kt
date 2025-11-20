@@ -1,14 +1,14 @@
 package com.waterresistantcoder.streakquest.presentation.navigation
 
 import android.net.Uri
-import com.waterresistantcoder.streakquest.util.Constants
 
 sealed class Screen(val route: String) {
     data object Splash : Screen("splash_screen")
-    data object Quiz : Screen("quiz_screen/{quizUrl}") {
-        fun createRoute(url: String): String {
+    data object Module : Screen("module_screen")
+    data object Quiz : Screen("quiz_screen/{id}/{quizUrl}") {
+        fun createRoute(id: String, url: String): String {
             val encodedUrl = Uri.encode(url)
-            return "quiz_screen/$encodedUrl"
+            return "quiz_screen/$id/$encodedUrl"
         }
     }
 

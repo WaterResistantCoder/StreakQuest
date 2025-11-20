@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.waterresistantcoder.streakquest.presentation.quiz.QuizScreen
+import com.waterresistantcoder.streakquest.presentation.quizmodule.QuizModuleScreen
 import com.waterresistantcoder.streakquest.presentation.result.ResultScreen
 import com.waterresistantcoder.streakquest.presentation.splash.SplashScreen
 import com.waterresistantcoder.streakquest.util.Constants
@@ -21,20 +22,18 @@ fun QuizNavGraph(navController: NavHostController) {
             SplashScreen(navController = navController)
         }
 
+        composable(route = Screen.Module.route) {
+            QuizModuleScreen(navController = navController)
+        }
+
         composable(
             route = Screen.Quiz.route,
             arguments = listOf(
+                navArgument("id") { type = NavType.StringType },
                 navArgument(Constants.QUIZ_URL_KEY) { type = NavType.StringType }
             )
-        ) { backStackEntry ->
-            // 1. Retrieve the argument safely
-            val quizUrl = backStackEntry.arguments?.getString(Constants.QUIZ_URL_KEY) ?: ""
-
-            // 2. Pass the argument to the Composable function
-            QuizScreen(
-                navController = navController,
-                quizUrl = quizUrl
-            )
+        ) {
+            QuizScreen(navController = navController)
         }
 
         composable(

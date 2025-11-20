@@ -4,7 +4,9 @@ import android.content.Context
 import androidx.room.Room
 import com.waterresistantcoder.streakquest.data.local.database.QuizModuleDatabase
 import com.waterresistantcoder.streakquest.data.remote.QuizApi
+import com.waterresistantcoder.streakquest.data.repository.QuizModelRepositoryImpl
 import com.waterresistantcoder.streakquest.data.repository.QuizRepositoryImpl
+import com.waterresistantcoder.streakquest.domain.repository.QuizModelRepository
 import com.waterresistantcoder.streakquest.domain.repository.QuizRepository
 import com.waterresistantcoder.streakquest.util.Constants
 import dagger.Module
@@ -43,5 +45,14 @@ object AppModule {
             app,
             QuizModuleDatabase::class.java, "quiz-db"
         ).build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideQuizModelDb(@ApplicationContext app: Context): QuizModelRepository {
+        return QuizModelRepositoryImpl(Room.databaseBuilder(
+            app,
+            QuizModuleDatabase::class.java, "quiz-db"
+        ).build())
     }
 }

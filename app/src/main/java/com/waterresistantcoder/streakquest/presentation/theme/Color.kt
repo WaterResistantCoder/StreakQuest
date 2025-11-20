@@ -15,6 +15,7 @@ val DarkBackground = Color(0xFF121212)
 val CardBackground = Color(0xFF1E1E1E)
 val TextWhite = Color(0xFFEEEEEE)
 val TextGrey = Color(0xFFAAAAAA)
+val TextDark = Color(0xFF000000)
 
 val CorrectGreen = Color(0xFF4CAF50)
 val WrongRed = Color(0xFFF44336)

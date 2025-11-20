@@ -4,14 +4,14 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.waterresistantcoder.streakquest.data.local.entity.QuizModule
+import com.waterresistantcoder.streakquest.data.local.entity.QuizModuleEntity
 
 @Dao
 interface QuizModuleDao {
 
     @Query("SELECT * FROM quiz_module where id = :id")
-    fun getModule(id: String): QuizModule
+    suspend fun getModule(id: String): QuizModuleEntity?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertModule(module: QuizModule)
+    suspend fun insertModule(module: QuizModuleEntity)
 }

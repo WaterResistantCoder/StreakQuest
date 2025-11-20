@@ -17,11 +17,8 @@ import kotlinx.coroutines.delay
 fun SplashScreen(navController: NavController) {
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         LaunchedEffect(key1 = true) {
-            delay(1500)
-            navController.navigate( // TODO module screen
-                Screen.Quiz.createRoute(
-                    url = "https://gist.githubusercontent.com/dr-samrat/0be7c28b6cb58e1c0674c11d7f0ba35d/raw/450fd602caac596a9127dc51d695c63e609542c5/jetpack_compose.json"
-                )) {
+            delay(1000L)
+            navController.navigate(Screen.Module.route) {
                 popUpTo(Screen.Splash.route) { inclusive = true }
             }
         }

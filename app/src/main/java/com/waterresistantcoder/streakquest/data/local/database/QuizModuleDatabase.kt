@@ -4,10 +4,10 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.waterresistantcoder.streakquest.data.local.dao.QuizModuleDao
-import com.waterresistantcoder.streakquest.data.local.entity.QuizModule
+import com.waterresistantcoder.streakquest.data.local.entity.QuizModuleEntity
 import com.waterresistantcoder.streakquest.data.mapper.MapConverter
 
-@Database(entities = [QuizModule::class], version = 1)
+@Database(entities = [QuizModuleEntity::class], version = 1)
 @TypeConverters(MapConverter::class)
 abstract class QuizModuleDatabase: RoomDatabase() {
     abstract fun getQuizModuleDao(): QuizModuleDao
