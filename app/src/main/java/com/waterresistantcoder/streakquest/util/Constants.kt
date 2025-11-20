@@ -5,4 +5,6 @@ object Constants {
 
     const val QUESTION_TRANSITION_DELAY = 2000L // 2 Seconds
     const val STREAK_THRESHOLD = 3 // Number of correct answers to light up the badge
+
+    const val QUIZ_URL_KEY = "quizUrl"
 }

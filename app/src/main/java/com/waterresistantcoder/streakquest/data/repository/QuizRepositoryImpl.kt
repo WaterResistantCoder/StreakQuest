@@ -13,10 +13,10 @@ class QuizRepositoryImpl @Inject constructor(
     private val api: QuizApi
 ) : QuizRepository {
 
-    override suspend fun getQuestions(): List<Question> {
+    override suspend fun getQuestions(quizUrl: String): List<Question> {
         return withContext(Dispatchers.IO) {
             try {
-                val response = api.getQuestions()
+                val response = api.getQuestions(quizUrl)
                 response.map { it.toDomainQuestion() }
             } catch (e: Exception) {
                 Log.e("QuizRepository", "Error fetching questions", e)

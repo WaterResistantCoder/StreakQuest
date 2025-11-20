@@ -46,6 +46,7 @@ import com.waterresistantcoder.streakquest.presentation.theme.DarkBackground
 @Composable
 fun QuizScreen(
     navController: NavController,
+    quizUrl: String,
     viewModel: QuizViewModel = hiltViewModel()
 ) {
     val state = viewModel.state.value

@@ -2,6 +2,7 @@ package com.waterresistantcoder.streakquest.presentation.quiz
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.waterresistantcoder.streakquest.domain.usecase.GetQuestionsUseCase
@@ -13,11 +14,14 @@ import javax.inject.Inject
 
 @HiltViewModel
 class QuizViewModel @Inject constructor(
-    private val getQuestionsUseCase: GetQuestionsUseCase
+    private val getQuestionsUseCase: GetQuestionsUseCase,
+    savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
     private val _state = mutableStateOf(QuizState())
     val state: State<QuizState> = _state
+
+    private val quizUrl: String = checkNotNull(savedStateHandle.get<String>(Constants.QUIZ_URL_KEY))
 
     init {
         loadQuestions()
@@ -27,7 +31,7 @@ class QuizViewModel @Inject constructor(
         viewModelScope.launch {
             _state.value = _state.value.copy(isLoading = true)
             try {
-                val questions = getQuestionsUseCase()
+                val questions = getQuestionsUseCase(quizUrl)
                 _state.value = _state.value.copy(
                     isLoading = false,
                     questions = questions,
